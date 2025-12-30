@@ -103,13 +103,6 @@ impl AppState {
             .and_then(|&idx| self.repositories.get(idx))
     }
 
-    pub fn staged_repos(&self) -> Vec<&Repository> {
-        self.repositories
-            .iter()
-            .filter(|r| self.staged_for_deletion.contains(&r.full_name))
-            .collect()
-    }
-
     pub fn staged_repos_sorted(&self) -> Vec<String> {
         let mut names: Vec<_> = self.staged_for_deletion.iter().cloned().collect();
         names.sort();

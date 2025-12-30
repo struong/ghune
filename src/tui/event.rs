@@ -9,7 +9,7 @@ use tokio::sync::mpsc;
 pub enum Event {
     Key(KeyEvent),
     Tick,
-    Resize(u16, u16),
+    Resize,
 }
 
 pub struct EventHandler {
@@ -37,8 +37,8 @@ impl EventHandler {
                                             break;
                                         }
                                     }
-                                    CrosstermEvent::Resize(w, h) => {
-                                        if tx.send(Event::Resize(w, h)).is_err() {
+                                    CrosstermEvent::Resize(_, _) => {
+                                        if tx.send(Event::Resize).is_err() {
                                             break;
                                         }
                                     }

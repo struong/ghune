@@ -60,7 +60,7 @@ impl App {
                 Event::Tick => {
                     self.state.clear_status();
                 }
-                Event::Resize(_, _) => {}
+                Event::Resize => {}
             }
         }
 
