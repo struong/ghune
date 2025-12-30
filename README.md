@@ -2,6 +2,8 @@
 
 Cleaning up my repos from the Github UI is tedious. Bulk-delete GitHub repos from the terminal instead!
 
+![prune demo](assets/demo.png)
+
 ## Install
 
 ```bash
