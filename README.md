@@ -1,6 +1,6 @@
 # prune
 
-Bulk-delete GitHub repos from the terminal.
+Cleaning up my repos from the Github UI is tedious. Bulk-delete GitHub repos from the terminal instead!
 
 ## Install
 
