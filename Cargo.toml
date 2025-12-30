@@ -1,7 +1,10 @@
 [package]
 name = "prune"
+description = "Bulk-delete Github repos from the terminal"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/struong/prune"
 
 [dependencies]
 octocrab = "0.44"
