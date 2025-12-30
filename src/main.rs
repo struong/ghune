@@ -12,7 +12,7 @@ use app::App;
 use auth::TokenManager;
 
 #[derive(Parser)]
-#[command(name = "prune")]
+#[command(name = "ghune")]
 #[command(about = "Interactive GitHub repository deletion tool")]
 #[command(version)]
 struct Cli {

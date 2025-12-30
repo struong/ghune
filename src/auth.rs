@@ -2,7 +2,7 @@ use color_eyre::eyre::{eyre, Result};
 use keyring::Entry;
 use std::io::{self, Write};
 
-const SERVICE_NAME: &str = "prune-github-cli";
+const SERVICE_NAME: &str = "ghune-github-cli";
 const USERNAME: &str = "github-token";
 
 pub struct TokenManager {

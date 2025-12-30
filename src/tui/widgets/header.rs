@@ -44,7 +44,7 @@ pub fn render_header(frame: &mut Frame, area: Rect, state: &AppState) {
 
     let line = Line::from(vec![
         Span::styled(
-            "prune",
+            "ghune",
             Style::default()
                 .fg(Color::Cyan)
                 .add_modifier(Modifier::BOLD),

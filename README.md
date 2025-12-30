@@ -1,8 +1,8 @@
-# prune
+# ghune
 
 Cleaning up repos from the Github UI is tedious. Bulk-delete GitHub repos from the terminal instead!
 
-![prune demo](assets/demo.png)
+![ghune demo](assets/demo.png)
 
 ## Install
 
@@ -17,9 +17,9 @@ Create a GitHub token at https://github.com/settings/tokens/new with `repo` and 
 ## Usage
 
 ```bash
-prune            # interactive mode
-prune --dry-run  # test without deleting
-prune --logout   # clear stored token
+ghune            # interactive mode
+ghune --dry-run  # test without deleting
+ghune --logout   # clear stored token
 ```
 
 ## Keybindings
