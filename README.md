@@ -7,7 +7,7 @@ Cleaning up repos from the Github UI is tedious. Bulk-delete GitHub repos from t
 ## Install
 
 ```bash
-cargo install --path .
+cargo install ghune
 ```
 
 ## Setup
