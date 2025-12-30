@@ -1,0 +1,18 @@
+[package]
+name = "prune"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+octocrab = "0.44"
+ratatui = "0.29"
+crossterm = { version = "0.28", features = ["event-stream"] }
+nucleo = "0.5"
+tokio = { version = "1.42", features = ["full"] }
+futures = "0.3"
+keyring = "3.6"
+clap = { version = "4.5", features = ["derive"] }
+color-eyre = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+rpassword = "7.3"
+chrono = "0.4"
