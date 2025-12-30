@@ -26,7 +26,9 @@ pub fn render_staged(frame: &mut Frame, area: Rect, state: &AppState) {
         .title(Span::styled(
             title,
             if is_active {
-                Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)
+                Style::default()
+                    .fg(Color::Yellow)
+                    .add_modifier(Modifier::BOLD)
             } else if staged_count > 0 {
                 Style::default().fg(Color::Red)
             } else {

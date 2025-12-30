@@ -61,7 +61,9 @@ pub fn render_repo_list(frame: &mut Frame, area: Rect, state: &AppState) {
         .title(Span::styled(
             title,
             if is_active {
-                Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)
+                Style::default()
+                    .fg(Color::Green)
+                    .add_modifier(Modifier::BOLD)
             } else {
                 Style::default().fg(Color::DarkGray)
             },

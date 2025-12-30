@@ -36,7 +36,9 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
         }
         spans.push(Span::styled(
             *key,
-            Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD),
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
         ));
         spans.push(Span::raw(": "));
         spans.push(Span::styled(*action, Style::default().fg(Color::Gray)));
@@ -58,7 +60,9 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
             spans.push(Span::raw("  "));
             spans.push(Span::styled(
                 format!("[{}]", filters.join(" ")),
-                Style::default().fg(Color::Magenta).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .fg(Color::Magenta)
+                    .add_modifier(Modifier::BOLD),
             ));
         }
     }
@@ -72,7 +76,9 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
         Line::from(vec![
             Span::styled(
                 format!("{} ", spinner),
-                Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .fg(Color::Yellow)
+                    .add_modifier(Modifier::BOLD),
             ),
             Span::styled(
                 format!("{}Deleting {}/{}: ", dry_run_prefix, current, total),
@@ -80,7 +86,9 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
             ),
             Span::styled(
                 repo_name,
-                Style::default().fg(Color::White).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .fg(Color::White)
+                    .add_modifier(Modifier::BOLD),
             ),
         ])
     } else if let Some((ref msg, ref level)) = state.status_message {

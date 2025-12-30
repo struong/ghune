@@ -5,7 +5,9 @@ use ratatui::{
 
 use crate::state::AppState;
 
-use super::widgets::{render_header, render_repo_list, render_search, render_staged, render_status};
+use super::widgets::{
+    render_header, render_repo_list, render_search, render_staged, render_status,
+};
 
 pub fn render(frame: &mut Frame, state: &AppState) {
     let main_chunks = Layout::default()

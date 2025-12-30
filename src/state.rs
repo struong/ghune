@@ -153,7 +153,9 @@ impl AppState {
         let names = self.staged_repos_sorted();
         if let Some(name) = names.get(self.staged_selected_index) {
             self.staged_for_deletion.remove(name);
-            if self.staged_selected_index > 0 && self.staged_selected_index >= self.staged_for_deletion.len() {
+            if self.staged_selected_index > 0
+                && self.staged_selected_index >= self.staged_for_deletion.len()
+            {
                 self.staged_selected_index = self.staged_for_deletion.len().saturating_sub(1);
             }
         }

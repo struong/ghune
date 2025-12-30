@@ -10,8 +10,12 @@ use crate::state::{AppMode, AppState};
 
 pub fn render_header(frame: &mut Frame, area: Rect, state: &AppState) {
     let mode_style = match state.mode {
-        AppMode::Search => Style::default().fg(Color::Green).add_modifier(Modifier::BOLD),
-        AppMode::Staging => Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD),
+        AppMode::Search => Style::default()
+            .fg(Color::Green)
+            .add_modifier(Modifier::BOLD),
+        AppMode::Staging => Style::default()
+            .fg(Color::Yellow)
+            .add_modifier(Modifier::BOLD),
         AppMode::Deleting => Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
     };
 
@@ -28,13 +32,23 @@ pub fn render_header(frame: &mut Frame, area: Rect, state: &AppState) {
     };
 
     let dry_run_indicator = if state.dry_run {
-        Span::styled(" [DRY RUN]", Style::default().fg(Color::Magenta).add_modifier(Modifier::BOLD))
+        Span::styled(
+            " [DRY RUN]",
+            Style::default()
+                .fg(Color::Magenta)
+                .add_modifier(Modifier::BOLD),
+        )
     } else {
         Span::raw("")
     };
 
     let line = Line::from(vec![
-        Span::styled("prune", Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD)),
+        Span::styled(
+            "prune",
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
+        ),
         dry_run_indicator,
         Span::raw("  "),
         Span::styled(format!("[{}]", mode_text), mode_style),

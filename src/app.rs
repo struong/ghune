@@ -82,13 +82,16 @@ impl App {
             }
             Err(e) => {
                 self.state.loading = false;
-                self.state.set_status(format!("Failed to load repos: {}", e), StatusLevel::Error);
+                self.state
+                    .set_status(format!("Failed to load repos: {}", e), StatusLevel::Error);
             }
         }
     }
 
     fn update_filtered(&mut self) {
-        let mut indices = self.fuzzy.filter(&self.state.repositories, &self.state.search_query);
+        let mut indices = self
+            .fuzzy
+            .filter(&self.state.repositories, &self.state.search_query);
 
         // Apply filters
         indices.retain(|&idx| {
@@ -122,7 +125,10 @@ impl App {
                 indices.sort_by(|&a, &b| {
                     let repo_a = &self.state.repositories[a];
                     let repo_b = &self.state.repositories[b];
-                    repo_a.full_name.to_lowercase().cmp(&repo_b.full_name.to_lowercase())
+                    repo_a
+                        .full_name
+                        .to_lowercase()
+                        .cmp(&repo_b.full_name.to_lowercase())
                 });
             }
             SortMode::Stars => {
@@ -150,9 +156,8 @@ impl App {
 
     fn handle_search_key(&mut self, key: KeyEvent) -> Action {
         match (key.code, key.modifiers) {
-            (KeyCode::Char('c'), KeyModifiers::CONTROL) | (KeyCode::Char('q'), KeyModifiers::NONE) => {
-                Action::Quit
-            }
+            (KeyCode::Char('c'), KeyModifiers::CONTROL)
+            | (KeyCode::Char('q'), KeyModifiers::NONE) => Action::Quit,
 
             (KeyCode::Char('j'), KeyModifiers::CONTROL) | (KeyCode::Down, _) => {
                 self.state.move_selection(1);
@@ -175,7 +180,10 @@ impl App {
                     self.state.mode = AppMode::Staging;
                     self.state.staged_selected_index = 0;
                 } else {
-                    self.state.set_status("No repos staged for deletion".to_string(), StatusLevel::Warning);
+                    self.state.set_status(
+                        "No repos staged for deletion".to_string(),
+                        StatusLevel::Warning,
+                    );
                 }
                 Action::None
             }
@@ -240,9 +248,8 @@ impl App {
 
     fn handle_staging_key(&mut self, key: KeyEvent) -> Action {
         match (key.code, key.modifiers) {
-            (KeyCode::Char('c'), KeyModifiers::CONTROL) | (KeyCode::Char('q'), KeyModifiers::NONE) => {
-                Action::Quit
-            }
+            (KeyCode::Char('c'), KeyModifiers::CONTROL)
+            | (KeyCode::Char('q'), KeyModifiers::NONE) => Action::Quit,
 
             (KeyCode::Char('j'), KeyModifiers::CONTROL) | (KeyCode::Down, _) => {
                 self.state.move_selection(1);

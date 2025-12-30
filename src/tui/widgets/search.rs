@@ -23,7 +23,9 @@ pub fn render_search(frame: &mut Frame, area: Rect, state: &AppState) {
         .title(Span::styled(
             " Search ",
             if is_active {
-                Style::default().fg(Color::Green).add_modifier(Modifier::BOLD)
+                Style::default()
+                    .fg(Color::Green)
+                    .add_modifier(Modifier::BOLD)
             } else {
                 Style::default().fg(Color::DarkGray)
             },
@@ -34,7 +36,12 @@ pub fn render_search(frame: &mut Frame, area: Rect, state: &AppState) {
     let content = Line::from(vec![
         Span::styled("> ", Style::default().fg(Color::Yellow)),
         Span::raw(&state.search_query),
-        Span::styled(cursor_char, Style::default().fg(Color::White).add_modifier(Modifier::SLOW_BLINK)),
+        Span::styled(
+            cursor_char,
+            Style::default()
+                .fg(Color::White)
+                .add_modifier(Modifier::SLOW_BLINK),
+        ),
     ]);
 
     let paragraph = Paragraph::new(content).block(block);
