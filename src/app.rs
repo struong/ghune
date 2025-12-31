@@ -175,7 +175,7 @@ impl App {
                 Action::None
             }
 
-            (KeyCode::Char('t'), KeyModifiers::CONTROL) => {
+            (KeyCode::Tab, KeyModifiers::NONE) => {
                 if !self.state.staged_for_deletion.is_empty() {
                     self.state.mode = AppMode::Staging;
                     self.state.staged_selected_index = 0;
@@ -278,7 +278,7 @@ impl App {
                 }
             }
 
-            (KeyCode::Char('t'), KeyModifiers::CONTROL) | (KeyCode::Esc, _) => {
+            (KeyCode::Tab, KeyModifiers::NONE) | (KeyCode::Esc, _) => {
                 self.state.mode = AppMode::Search;
                 Action::None
             }

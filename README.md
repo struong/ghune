@@ -27,7 +27,7 @@ ghune --logout   # clear stored token
 **Search mode:**
 - `C-j/k` or arrows — navigate
 - `Enter` — stage repo for deletion
-- `C-t` — switch to staging mode
+- `<Tab>` — switch to staging mode
 - `C-p` — filter private only
 - `C-f` — filter forks only
 - `C-s` — cycle sort (updated/created/name/stars)
@@ -38,7 +38,7 @@ ghune --logout   # clear stored token
 - `C-j/k` — navigate
 - `Backspace` — unstage repo
 - `Enter` — delete staged repos
-- `C-t` or `Esc` — back to search
+- `<Tab>` or `Esc` — back to search
 
 ## License
 

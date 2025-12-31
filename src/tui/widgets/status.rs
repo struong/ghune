@@ -13,7 +13,7 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
         AppMode::Search => vec![
             ("C-j/k", "Nav"),
             ("Enter", "Stage"),
-            ("C-t", "Staging"),
+            ("Tab", "Staging"),
             ("C-p", "Private"),
             ("C-f", "Forks"),
             ("C-s", "Sort"),
@@ -23,7 +23,7 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
             ("C-j/C-k", "Navigate"),
             ("Backspace", "Unstage"),
             ("Enter", "Delete"),
-            ("C-t/Esc", "Back"),
+            ("Tab/Esc", "Back"),
             ("C-c/q", "Quit"),
         ],
         AppMode::Deleting => vec![("", "Deleting repositories...")],
