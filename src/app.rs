@@ -169,7 +169,7 @@ impl App {
                 Action::None
             }
 
-            (KeyCode::Enter, KeyModifiers::NONE) => {
+            (KeyCode::Enter, KeyModifiers::NONE) | (KeyCode::Char(' '), KeyModifiers::NONE) => {
                 self.state.toggle_stage();
                 self.state.move_selection(1);
                 Action::None
@@ -261,7 +261,9 @@ impl App {
                 Action::None
             }
 
-            (KeyCode::Backspace, _) | (KeyCode::Delete, _) => {
+            (KeyCode::Backspace, _)
+            | (KeyCode::Delete, _)
+            | (KeyCode::Char(' '), KeyModifiers::NONE) => {
                 self.state.unstage_selected();
                 if self.state.staged_for_deletion.is_empty() {
                     self.state.mode = AppMode::Search;
