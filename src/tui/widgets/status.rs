@@ -26,11 +26,7 @@ pub fn render_status(frame: &mut Frame, area: Rect, state: &AppState) {
             ("Tab/Esc", "Back"),
             ("C-c/q", "Quit"),
         ],
-        AppMode::ConfirmDeletion => vec![
-            ("Enter", "Confirm"),
-            ("Esc", "Cancel"),
-            ("C-c", "Quit"),
-        ],
+        AppMode::ConfirmDeletion => vec![("Enter", "Confirm"), ("Esc", "Cancel"), ("C-c", "Quit")],
         AppMode::Deleting => vec![("", "Deleting repositories...")],
     };
 

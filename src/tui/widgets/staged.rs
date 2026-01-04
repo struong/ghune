@@ -93,7 +93,12 @@ fn render_confirmation_dialog(frame: &mut Frame, area: Rect, state: &AppState) {
 
     let x = area.x + area.width.saturating_sub(dialog_width) / 2;
     let y = area.y + area.height.saturating_sub(dialog_height) / 2;
-    let dialog_area = Rect::new(x, y, dialog_width.min(area.width), dialog_height.min(area.height));
+    let dialog_area = Rect::new(
+        x,
+        y,
+        dialog_width.min(area.width),
+        dialog_height.min(area.height),
+    );
 
     frame.render_widget(Clear, dialog_area);
 
@@ -103,9 +108,7 @@ fn render_confirmation_dialog(frame: &mut Frame, area: Rect, state: &AppState) {
         .border_style(Style::default().fg(Color::Red))
         .title(Span::styled(
             " Confirm Deletion ",
-            Style::default()
-                .fg(Color::Red)
-                .add_modifier(Modifier::BOLD),
+            Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
         ));
 
     let inner = block.inner(dialog_area);
@@ -124,9 +127,7 @@ fn render_confirmation_dialog(frame: &mut Frame, area: Rect, state: &AppState) {
         Span::raw("Type "),
         Span::styled(
             count.to_string(),
-            Style::default()
-                .fg(Color::Red)
-                .add_modifier(Modifier::BOLD),
+            Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
         ),
         Span::raw(" to delete "),
         Span::styled(
