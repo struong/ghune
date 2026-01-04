@@ -6,6 +6,7 @@ use crate::github::types::Repository;
 pub enum AppMode {
     Search,
     Staging,
+    ConfirmDeletion,
     Deleting,
 }
 
@@ -62,6 +63,7 @@ pub struct AppState {
     pub deleting_repo: Option<String>,
     pub spinner_frame: usize,
     pub dry_run: bool,
+    pub confirmation_input: String,
     pub filter_private: bool,
     pub filter_forks: bool,
     pub sort_mode: SortMode,
@@ -83,6 +85,7 @@ impl AppState {
             deleting_repo: None,
             spinner_frame: 0,
             dry_run,
+            confirmation_input: String::new(),
             filter_private: false,
             filter_forks: false,
             sort_mode: SortMode::default(),
@@ -127,7 +130,7 @@ impl AppState {
                 let new_idx = (self.staged_selected_index as i32 + delta).rem_euclid(len);
                 self.staged_selected_index = new_idx as usize;
             }
-            AppMode::Deleting => {}
+            AppMode::ConfirmDeletion | AppMode::Deleting => {}
         }
     }
 

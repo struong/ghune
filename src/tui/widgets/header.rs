@@ -13,7 +13,7 @@ pub fn render_header(frame: &mut Frame, area: Rect, state: &AppState) {
         AppMode::Search => Style::default()
             .fg(Color::Green)
             .add_modifier(Modifier::BOLD),
-        AppMode::Staging => Style::default()
+        AppMode::Staging | AppMode::ConfirmDeletion => Style::default()
             .fg(Color::Yellow)
             .add_modifier(Modifier::BOLD),
         AppMode::Deleting => Style::default().fg(Color::Red).add_modifier(Modifier::BOLD),
@@ -22,6 +22,7 @@ pub fn render_header(frame: &mut Frame, area: Rect, state: &AppState) {
     let mode_text = match state.mode {
         AppMode::Search => "SEARCH",
         AppMode::Staging => "STAGING",
+        AppMode::ConfirmDeletion => "CONFIRM",
         AppMode::Deleting => "DELETING",
     };
 
