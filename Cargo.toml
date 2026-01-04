@@ -8,7 +8,7 @@ repository = "https://github.com/struong/ghune"
 
 [dependencies]
 octocrab = "0.44"
-ratatui = "0.29"
+ratatui = "0.30"
 crossterm = { version = "0.28", features = ["event-stream"] }
 nucleo = "0.5"
 tokio = { version = "1.42", features = ["full"] }
