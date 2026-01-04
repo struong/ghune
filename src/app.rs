@@ -150,6 +150,7 @@ impl App {
         match self.state.mode {
             AppMode::Search => self.handle_search_key(key),
             AppMode::Staging => self.handle_staging_key(key),
+            AppMode::ConfirmDeletion => self.handle_confirm_key(key),
             AppMode::Deleting => Action::None,
         }
     }
@@ -273,15 +274,56 @@ impl App {
 
             (KeyCode::Enter, KeyModifiers::NONE) => {
                 if !self.state.staged_for_deletion.is_empty() {
-                    Action::ExecuteDeletion
+                    self.state.confirmation_input.clear();
+                    self.state.mode = AppMode::ConfirmDeletion;
                 } else {
                     self.state.mode = AppMode::Search;
-                    Action::None
                 }
+                Action::None
             }
 
             (KeyCode::Tab, KeyModifiers::NONE) | (KeyCode::Esc, _) => {
                 self.state.mode = AppMode::Search;
+                Action::None
+            }
+
+            _ => Action::None,
+        }
+    }
+
+    fn handle_confirm_key(&mut self, key: KeyEvent) -> Action {
+        match (key.code, key.modifiers) {
+            (KeyCode::Char('c'), KeyModifiers::CONTROL) => Action::Quit,
+
+            (KeyCode::Esc, _) => {
+                self.state.confirmation_input.clear();
+                self.state.mode = AppMode::Staging;
+                Action::None
+            }
+
+            (KeyCode::Enter, KeyModifiers::NONE) => {
+                let expected = self.state.staged_for_deletion.len().to_string();
+                if self.state.confirmation_input == expected {
+                    self.state.confirmation_input.clear();
+                    Action::ExecuteDeletion
+                } else {
+                    self.state.set_status(
+                        format!("Type '{}' to confirm deletion", expected),
+                        StatusLevel::Warning,
+                    );
+                    Action::None
+                }
+            }
+
+            (KeyCode::Backspace, _) => {
+                self.state.confirmation_input.pop();
+                Action::None
+            }
+
+            (KeyCode::Char(c), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
+                if c.is_ascii_digit() {
+                    self.state.confirmation_input.push(c);
+                }
                 Action::None
             }
 
