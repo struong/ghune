@@ -49,10 +49,14 @@ pub fn render_repo_list(frame: &mut Frame, area: Rect, state: &AppState) {
     let filtered_count = state.filtered_indices.len();
     let total_count = state.repositories.len();
 
+    let tab_hint = if !is_active { "[Tab] " } else { "" };
     let title = if state.search_query.is_empty() {
-        format!(" Repositories ({}) ", total_count)
+        format!(" {}Repositories ({}) ", tab_hint, total_count)
     } else {
-        format!(" Repositories ({}/{}) ", filtered_count, total_count)
+        format!(
+            " {}Repositories ({}/{}) ",
+            tab_hint, filtered_count, total_count
+        )
     };
 
     let block = Block::default()

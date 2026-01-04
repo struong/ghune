@@ -18,7 +18,8 @@ pub fn render_staged(frame: &mut Frame, area: Rect, state: &AppState) {
     };
 
     let staged_count = state.staged_for_deletion.len();
-    let title = format!(" Staged ({}) ", staged_count);
+    let tab_hint = if !is_active { "[Tab] " } else { "" };
+    let title = format!(" {}Staged ({}) ", tab_hint, staged_count);
 
     let block = Block::default()
         .borders(Borders::ALL)
