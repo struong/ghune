@@ -1,26 +1,34 @@
 use color_eyre::eyre::{eyre, Result};
-use keyring::Entry;
+use std::fs;
 use std::io::{self, Write};
+use std::path::PathBuf;
 
-const SERVICE_NAME: &str = "ghune-github-cli";
-const USERNAME: &str = "github-token";
+#[cfg(unix)]
+use std::os::unix::fs::PermissionsExt;
 
-pub struct TokenManager {
-    entry: Entry,
+fn token_file_path() -> Result<PathBuf> {
+    let config_dir = dirs::config_dir()
+        .ok_or_else(|| eyre!("Could not find config directory"))?
+        .join("ghune");
+    Ok(config_dir.join("token"))
 }
+
+pub struct TokenManager;
 
 impl TokenManager {
     pub fn new() -> Result<Self> {
-        let entry = Entry::new(SERVICE_NAME, USERNAME)?;
-        Ok(Self { entry })
+        Ok(Self)
     }
 
     pub fn get_token(&self) -> Result<Option<String>> {
-        match self.entry.get_password() {
-            Ok(token) => Ok(Some(token)),
-            Err(keyring::Error::NoEntry) => Ok(None),
-            Err(e) => Err(e.into()),
+        let path = token_file_path()?;
+        if path.exists() {
+            let token = fs::read_to_string(&path)?.trim().to_string();
+            if !token.is_empty() {
+                return Ok(Some(token));
+            }
         }
+        Ok(None)
     }
 
     pub fn get_or_prompt_token(&self) -> Result<String> {
@@ -52,15 +60,27 @@ impl TokenManager {
     }
 
     pub fn store_token(&self, token: &str) -> Result<()> {
-        self.entry.set_password(token)?;
+        let path = token_file_path()?;
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        fs::write(&path, token)?;
+
+        #[cfg(unix)]
+        {
+            let mut perms = fs::metadata(&path)?.permissions();
+            perms.set_mode(0o600);
+            fs::set_permissions(&path, perms)?;
+        }
+
         Ok(())
     }
 
     pub fn clear_token(&self) -> Result<()> {
-        match self.entry.delete_credential() {
-            Ok(()) => Ok(()),
-            Err(keyring::Error::NoEntry) => Ok(()),
-            Err(e) => Err(e.into()),
+        let path = token_file_path()?;
+        if path.exists() {
+            fs::remove_file(&path)?;
         }
+        Ok(())
     }
 }
