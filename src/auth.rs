@@ -64,7 +64,7 @@ impl TokenManager {
         if let Some(parent) = path.parent() {
             fs::create_dir_all(parent)?;
         }
-        fs::write(&path, token)?;
+        fs::write(&path, format!("{}\n", token))?;
 
         #[cfg(unix)]
         {
