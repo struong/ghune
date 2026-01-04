@@ -12,7 +12,7 @@ cargo install ghune
 
 ## Setup
 
-Create a GitHub token at https://github.com/settings/tokens/new with `repo` and `delete_repo` scopes. The tool prompts for it on first run and stores it in your OS keychain.
+Create a GitHub token at https://github.com/settings/tokens/new with `repo` and `delete_repo` scopes. The tool prompts for it on first run and stores it in `~/.config/ghune/token`.
 
 ## Usage
 
@@ -26,7 +26,7 @@ ghune --logout   # clear stored token
 
 **Search mode:**
 - `C-j/k` or arrows — navigate
-- `Enter` — stage repo for deletion
+- `Enter` or `Space` — stage repo for deletion
 - `<Tab>` — switch to staging mode
 - `C-p` — filter private only
 - `C-f` — filter forks only
@@ -36,8 +36,8 @@ ghune --logout   # clear stored token
 
 **Staging mode:**
 - `C-j/k` — navigate
-- `Backspace` — unstage repo
-- `Enter` — delete staged repos
+- `Backspace` or `Space` — unstage repo
+- `Enter` — confirm deletion (with confirmation dialog)
 - `<Tab>` or `Esc` — back to search
 
 ## License
